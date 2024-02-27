@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import { getPublicGists } from "./api/gists";
 import NavLayout from "./layouts/NavLayout";
+import Gists from "./pages/Gists";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/gists",
-        element: <h1>Gists</h1>,
+        element: <Gists />,
         loader: (args) => {
           return getPublicGists(args);
         },

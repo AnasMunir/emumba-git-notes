@@ -1,12 +1,22 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import { getPublicGists } from "./api/gists";
+import NavLayout from "./layouts/NavLayout";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <h1>Gists</h1>,
-    loader: (args) => {
-      return getPublicGists(args);
-    },
+    element: <NavLayout />,
+    children: [
+      {
+        index: true,
+        loader: () => redirect("/gists"),
+      },
+      {
+        path: "/gists",
+        element: <h1>Gists</h1>,
+        loader: (args) => {
+          return getPublicGists(args);
+        },
+      },
+    ],
   },
 ]);

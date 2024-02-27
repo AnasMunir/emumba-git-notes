@@ -5,13 +5,14 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>) {
   const {
     request: { signal },
   } = args;
-  const params = {
-    page: 100,
-  };
+  // eslint-disable-next-line no-unused-vars
+  // const params = {
+  //   page: 1,
+  // };
 
   return baseApi
-    .get(`public`, {
-      params,
+    .get(``, {
+      // params,
       signal,
       headers: {
         Authorization: import.meta.env.VITE_BEARER_TOKEN,

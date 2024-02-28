@@ -12,6 +12,7 @@ export type TGist = {
   html_url: string;
   files: {
     [filename: string]: {
+      content: string;
       filename: string;
       type: string;
       language: string;
@@ -58,7 +59,6 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
   const {
     request: { signal },
   } = args;
-  // eslint-disable-next-line no-unused-vars
   const params = {
     page: 1,
     per_page: 10,
@@ -75,13 +75,35 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
     .then((res) => res.data);
 }
 
-export function getGist(gistId: string, signal: AbortSignal) {
-  return baseApi.get(`${gistId}`, { signal }).then((res) => res.data);
+export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {
+  return baseApi
+    .get(`${gistId}`, {
+      signal,
+      headers: {
+        Authorization: import.meta.env.VITE_BEARER_TOKEN,
+      },
+    })
+    .then((res) => res.data);
 }
 
 export function createGist({ data, options }: TCreateGist) {
   return baseApi
     .post("", data, {
+      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
+      ...options,
+    })
+    .then((res) => res.data);
+}
+
+type TUpdateGist = {
+  data: { description: string; files: Record<string, { content: string }> };
+  id: string;
+  options: AbortSignal;
+};
+
+export function updateGist({ data, id, options }: TUpdateGist) {
+  return baseApi
+    .patch(`/${id}`, data, {
       headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
       ...options,
     })

@@ -2,7 +2,13 @@ import { Form, Link } from "react-router-dom";
 import FormGroup from "./FormGroup";
 
 interface IGistForm {
-  errors: TGistFormErrors;
+  errors?: TGistFormErrors;
+  defaultValues?: {
+    description: string;
+    name: string;
+    content: string;
+  };
+  method: "get" | "post" | "put" | "patch" | "delete";
 }
 
 export type TGistFormErrors = {
@@ -32,24 +38,34 @@ export function gistFormValidator({
   }
   return errors;
 }
-function GistForm({ errors }: IGistForm) {
+function GistForm({ method, errors, defaultValues }: IGistForm) {
   return (
-    <Form method='post' className='form'>
+    <Form method={method} className='form'>
       <div className='form-row'>
         <FormGroup className='form-group' errorMessage={errors?.description}>
-          <input type='text' name='description' id='description' placeholder='Enter gist description' />
+          <input
+            type='text'
+            name='description'
+            id='description'
+            defaultValue={defaultValues?.description}
+            placeholder='Enter gist description'
+          />
         </FormGroup>
         <FormGroup className='form-group' errorMessage={errors?.name}>
-          <input type='text' name='name' id='name' placeholder='Enter file name..' />
+          <input type='text' name='name' id='name' placeholder='Enter file name..' defaultValue={defaultValues?.name} />
         </FormGroup>
       </div>
       <div className='form-row'>
         <FormGroup className='form-group' errorMessage={errors?.content}>
-          <textarea name='content' id='content' placeholder='Enter file content..'></textarea>
+          <textarea
+            name='content'
+            id='content'
+            placeholder='Enter file content..'
+            defaultValue={defaultValues?.content}></textarea>
         </FormGroup>
       </div>
       <div className='form-row form-btn-row'>
-        <Link className='btn btn-outline' to='/posts'>
+        <Link className='btn btn-outline' to='/gists'>
           Cancel
         </Link>
         <button className='btn' type='submit' disabled={false}>

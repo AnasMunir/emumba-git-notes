@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 
 type TCard = {
-  url: string;
+  url?: string;
+  content?: string;
 };
-function Card({ url }: TCard) {
+function Card({ url, content }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
 
+  console.log(url);
   useEffect(() => {
-    fetch(url)
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        const formattedData = data.split(/\r?\n/, 13);
-        setGistFile(formattedData);
-      });
-  }, [url]);
+    if (content) {
+      return setGistFile(content?.split(/\r?\n/, 13));
+    } else if (url) {
+      fetch(url)
+        .then((response) => {
+          return response.text();
+        })
+        .then((data) => {
+          setGistFile(data.split(/\r?\n/, 13));
+        });
+    }
+  }, [url, content]);
 
   return (
     <div className='card'>

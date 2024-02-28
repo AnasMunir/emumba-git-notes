@@ -4,7 +4,7 @@ import GistForm, { TGistFormErrors, gistFormValidator } from "../components/Gist
 
 function NewGist() {
   const errors = useActionData() as TGistFormErrors;
-  return <GistForm errors={errors} />;
+  return <GistForm errors={errors} method='post' />;
 }
 
 async function action({ request }: ActionFunctionArgs) {

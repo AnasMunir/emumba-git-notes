@@ -4,6 +4,7 @@ import NavLayout from "./layouts/NavLayout";
 import Gists from "./pages/Gists";
 import { gistRoute } from "./pages/Gist";
 import { newGistRoute } from "./pages/NewGist";
+import { editGistRoute } from "./pages/EditGist";
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: "edit",
-                element: <h1>Edit Gist</h1>,
+                ...editGistRoute,
               },
             ],
           },

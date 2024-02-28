@@ -96,7 +96,7 @@ export function createGist({ data, options }: TCreateGist) {
 }
 
 type TUpdateGist = {
-  data: { description: string; files: Record<string, { content: string }> };
+  data?: { description: string; files: Record<string, { content: string }> };
   id: string;
   options: AbortSignal;
 };
@@ -105,6 +105,15 @@ export function updateGist({ data, id, options }: TUpdateGist) {
   return baseApi
     .patch(`/${id}`, data, {
       headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
+      ...options,
+    })
+    .then((res) => res.data);
+}
+
+export function deleteGist({ id, options }: TUpdateGist) {
+  return baseApi
+    .delete(`/${id}`, {
+      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN },
       ...options,
     })
     .then((res) => res.data);

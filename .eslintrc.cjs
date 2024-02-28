@@ -4,9 +4,10 @@ module.exports = {
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "@typescript-eslint/eslint-plugin"],
   rules: {
     "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
     "react/jsx-no-target-blank": "off",
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
   },

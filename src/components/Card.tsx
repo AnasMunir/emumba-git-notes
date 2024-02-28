@@ -12,11 +12,11 @@ function Card({ url }: TCard) {
         return response.text();
       })
       .then((data) => {
-        console.log(data.split(/\r?\n/));
         const formattedData = data.split(/\r?\n/, 13);
         setGistFile(formattedData);
       });
-  }, []);
+  }, [url]);
+
   return (
     <div className='card'>
       <div className='card-body'>

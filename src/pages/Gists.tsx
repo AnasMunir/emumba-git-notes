@@ -8,6 +8,9 @@ function Gists() {
 
   return (
     <div className='card-grid'>
+      <Link className='btn btn-outline' to='new'>
+        New
+      </Link>
       {gists.map((gist) => (
         <Link key={gist.id} to={gist.id} style={{ textDecoration: "none", color: "black" }}>
           <Card url={gist.files[Object.keys(gist.files)[0]].raw_url} />

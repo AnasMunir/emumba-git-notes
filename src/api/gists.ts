@@ -73,3 +73,8 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
 export function getGist(gistId: string, signal: AbortSignal) {
   return baseApi.get(`${gistId}`, { signal }).then((res) => res.data);
 }
+
+export function createGist(description: string, files: Record<string, { content: string }>) {
+  console.log("description", description);
+  console.log("files", files);
+}

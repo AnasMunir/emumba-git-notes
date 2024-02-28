@@ -3,6 +3,7 @@ import { getPublicGists } from "./api/gists";
 import NavLayout from "./layouts/NavLayout";
 import Gists from "./pages/Gists";
 import { gistRoute } from "./pages/Gist";
+import { newGistRoute } from "./pages/NewGist";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
           // TODO: create components
           {
             path: "new",
-            element: <h1>Create New Gist</h1>,
+            ...newGistRoute,
           },
           {
             path: ":gistId",

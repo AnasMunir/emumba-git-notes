@@ -49,6 +49,11 @@ export type TGist = {
   truncated: boolean;
 };
 
+type TCreateGist = {
+  data: { description: string; files: Record<string, { content: string }> };
+  options: AbortSignal;
+};
+
 export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist[]> {
   const {
     request: { signal },
@@ -63,9 +68,9 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
     .get(``, {
       params,
       signal,
-      // headers: {
-      //   Authorization: import.meta.env.VITE_BEARER_TOKEN,
-      // },
+      headers: {
+        Authorization: import.meta.env.VITE_BEARER_TOKEN,
+      },
     })
     .then((res) => res.data);
 }
@@ -74,7 +79,11 @@ export function getGist(gistId: string, signal: AbortSignal) {
   return baseApi.get(`${gistId}`, { signal }).then((res) => res.data);
 }
 
-export function createGist(description: string, files: Record<string, { content: string }>) {
-  console.log("description", description);
-  console.log("files", files);
+export function createGist({ data, options }: TCreateGist) {
+  return baseApi
+    .post("", data, {
+      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
+      ...options,
+    })
+    .then((res) => res.data);
 }

@@ -12,18 +12,14 @@ async function action({ request }: ActionFunctionArgs) {
   const description = formData.get("description") as string;
   const name = formData.get("name") as string;
   const content = formData.get("content") as string;
-
-  console.log(description);
-  console.log(name);
-  console.log(content);
   const errors = gistFormValidator({ description, name, content });
 
   if (Object.keys(errors).length > 0) {
     return errors;
   }
 
-  const file = { [name]: { content } };
-  createGist(description, file);
+  const files = { [name]: { content } };
+  await createGist({ data: { description, files }, options: request.signal });
 
   return redirect(`/`);
 }

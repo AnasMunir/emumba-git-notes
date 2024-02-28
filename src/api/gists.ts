@@ -69,3 +69,7 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
     })
     .then((res) => res.data);
 }
+
+export function getGist(gistId: string, signal: AbortSignal) {
+  return baseApi.get(`${gistId}`, { signal }).then((res) => res.data);
+}

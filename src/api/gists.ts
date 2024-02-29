@@ -12,7 +12,7 @@ export type TGist = {
   html_url: string;
   files: {
     [filename: string]: {
-      content: string;
+      content?: string;
       filename: string;
       type: string;
       language: string;
@@ -28,7 +28,7 @@ export type TGist = {
   user: null;
   comments_url: "https://api.github.com/gists/0c66c94594f0c6545de05b24be5e381e/comments";
   owner: {
-    login: "AnasMunir";
+    login: string;
     id: number;
     node_id: string;
     avatar_url: string;
@@ -55,10 +55,7 @@ type TCreateGist = {
   options: AbortSignal;
 };
 
-export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist[]> {
-  const {
-    request: { signal },
-  } = args;
+export function getUserGists(signal: AbortSignal): Promise<TGist[]> {
   const params = {
     page: 1,
     per_page: 10,
@@ -71,6 +68,20 @@ export function getPublicGists(args: LoaderFunctionArgs<unknown>): Promise<TGist
       headers: {
         Authorization: import.meta.env.VITE_BEARER_TOKEN,
       },
+    })
+    .then((res) => res.data);
+}
+
+export function getPublicGists(signal: AbortSignal): Promise<TGist[]> {
+  const params = {
+    page: 1,
+    per_page: 10,
+  };
+
+  return baseApi
+    .get(``, {
+      params,
+      signal,
     })
     .then((res) => res.data);
 }

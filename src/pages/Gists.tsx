@@ -1,5 +1,5 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { TGist } from "../api/gists";
+import { Link, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import { TGist, getPublicGists } from "../api/gists";
 import Card from "../components/Card";
 
 // TODO: create styles and sub components
@@ -30,4 +30,9 @@ function Gists() {
   );
 }
 
-export default Gists;
+export const gistsRoute = {
+  element: <Gists />,
+  loader: ({ request: { signal } }: LoaderFunctionArgs) => {
+    return getPublicGists(signal);
+  },
+};

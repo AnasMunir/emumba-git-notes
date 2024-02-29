@@ -1,10 +1,10 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import { getPublicGists } from "./api/gists";
 import NavLayout from "./layouts/NavLayout";
-import Gists from "./pages/Gists";
+import { gistsRoute } from "./pages/Gists";
 import { gistRoute } from "./pages/Gist";
 import { newGistRoute } from "./pages/NewGist";
 import { editGistRoute } from "./pages/EditGist";
+import { userRoute } from "./pages/User";
 
 export const router = createBrowserRouter([
   {
@@ -15,14 +15,15 @@ export const router = createBrowserRouter([
         loader: () => redirect("/gists"),
       },
       {
+        path: ":userId",
+        ...userRoute,
+      },
+      {
         path: "/gists",
         children: [
           {
             index: true,
-            element: <Gists />,
-            loader: (args) => {
-              return getPublicGists(args);
-            },
+            ...gistsRoute,
           },
           // TODO: create components
           {

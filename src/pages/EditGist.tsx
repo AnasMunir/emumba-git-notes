@@ -5,9 +5,9 @@ import GistForm, { gistFormValidator } from "../components/GistForm";
 function EditGist() {
   const gistData = useLoaderData() as TGist;
   const defaultValues = {
-    description: gistData.description,
-    name: gistData.files[Object.keys(gistData.files)[0]].filename,
-    content: gistData.files[Object.keys(gistData.files)[0]].content,
+    description: gistData.description || "",
+    name: gistData.files[Object.keys(gistData.files)[0]].filename || "",
+    content: gistData.files[Object.keys(gistData.files)[0]].content || "",
   };
   return <GistForm method='patch' defaultValues={defaultValues} />;
 }

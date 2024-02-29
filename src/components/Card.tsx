@@ -6,8 +6,6 @@ type TCard = {
 };
 function Card({ url, content }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
-
-  console.log(url);
   useEffect(() => {
     if (content) {
       return setGistFile(content?.split(/\r?\n/, 13));

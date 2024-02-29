@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         loader: () => redirect("/gists"),
       },
       {
-        path: ":userId",
+        path: ":userLogin",
         ...userRoute,
       },
       {

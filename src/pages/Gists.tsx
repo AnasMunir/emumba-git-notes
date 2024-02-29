@@ -12,9 +12,12 @@ function Gists() {
         New
       </Link>
       {gists.map((gist) => (
-        <Link key={gist.id} to={gist.id} style={{ textDecoration: "none", color: "black" }}>
-          <Card url={gist.files[Object.keys(gist.files)[0]].raw_url} />
-        </Link>
+        <Card
+          key={gist.id}
+          url={gist.files[Object.keys(gist.files)[0]].raw_url}
+          gistId={gist.id}
+          userLogin={gist.owner.login}
+        />
         // <div key={gist.id} style={{ display: "flex", justifyContent: "space-around" }}>
         //   <img
         //     style={{ borderRadius: "50%", width: 30, height: 30 }}

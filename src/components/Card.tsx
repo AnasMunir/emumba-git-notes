@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type TCard = {
   url?: string;
   content?: string;
+  gistId?: string;
+  userLogin?: string;
 };
-function Card({ url, content }: TCard) {
+function Card({ url, content, gistId, userLogin }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
   useEffect(() => {
     if (content) {
@@ -33,10 +36,12 @@ function Card({ url, content }: TCard) {
         </div>
       </div>
       <div className='card-footer'>
-        <p>footer</p>
-        {/* <Link className='btn' to={post.id.toString()}>
+        <Link className='btn' to={`/${userLogin}`}>
+          User
+        </Link>
+        <Link className='btn' to={`/gists/${gistId}`}>
           View
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

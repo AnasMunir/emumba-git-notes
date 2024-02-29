@@ -1,4 +1,3 @@
-import { LoaderFunctionArgs } from "react-router-dom";
 import { baseApi } from "./base";
 
 export type TGist = {
@@ -55,14 +54,13 @@ type TCreateGist = {
   options: AbortSignal;
 };
 
-export function getUserGists(signal: AbortSignal): Promise<TGist[]> {
+export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TGist[]> {
   const params = {
     page: 1,
     per_page: 10,
   };
-
   return baseApi
-    .get(``, {
+    .get(`/users/${userLogin}/gists`, {
       params,
       signal,
       headers: {
@@ -79,7 +77,7 @@ export function getPublicGists(signal: AbortSignal): Promise<TGist[]> {
   };
 
   return baseApi
-    .get(``, {
+    .get("gists", {
       params,
       signal,
     })
@@ -88,7 +86,7 @@ export function getPublicGists(signal: AbortSignal): Promise<TGist[]> {
 
 export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {
   return baseApi
-    .get(`${gistId}`, {
+    .get(`gists/${gistId}`, {
       signal,
       headers: {
         Authorization: import.meta.env.VITE_BEARER_TOKEN,
@@ -99,7 +97,7 @@ export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {
 
 export function createGist({ data, options }: TCreateGist) {
   return baseApi
-    .post("", data, {
+    .post("gists", data, {
       headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
       ...options,
     })
@@ -114,7 +112,7 @@ type TUpdateGist = {
 
 export function updateGist({ data, id, options }: TUpdateGist) {
   return baseApi
-    .patch(`/${id}`, data, {
+    .patch(`gists/${id}`, data, {
       headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
       ...options,
     })
@@ -123,7 +121,7 @@ export function updateGist({ data, id, options }: TUpdateGist) {
 
 export function deleteGist({ id, options }: TUpdateGist) {
   return baseApi
-    .delete(`/${id}`, {
+    .delete(`gists/${id}`, {
       headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN },
       ...options,
     })

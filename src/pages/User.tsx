@@ -14,6 +14,7 @@ function User() {
       <div>
         {userGists.map((gist) => (
           <Card
+            key={gist.id}
             url={gist.files[Object.keys(gist.files)[0]].raw_url}
             content={gist.files[Object.keys(gist.files)[0]].content}
             gistId={gist.id}

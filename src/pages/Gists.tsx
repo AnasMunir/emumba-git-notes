@@ -18,16 +18,6 @@ function Gists() {
           gistId={gist.id}
           userLogin={gist.owner.login}
         />
-        // <div key={gist.id} style={{ display: "flex", justifyContent: "space-around" }}>
-        //   <img
-        //     style={{ borderRadius: "50%", width: 30, height: 30 }}
-        //     src={gist.owner.avatar_url}
-        //     alt={`Avatar-${gist.owner.login}`}
-        //   />
-        //   <h3>{gist.owner.login}</h3>
-        //   <p>{gist.files[Object.keys(gist.files)[0]].filename}</p>
-        //   <div>{new Date(gist.created_at).toLocaleTimeString()}</div>
-        // </div>
       ))}
     </div>
   );

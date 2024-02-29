@@ -22,7 +22,7 @@ app.get("/authenticate", async (req, res) => {
   const { code } = req.query;
 
   fetch(
-    `https://github.com/login/oauth/access_token?client_id=${config.client_id}&client_secret=${config.client_secret}&code=${code}`,
+    `https://github.com/login/oauth/access_token?scope=repo%20gist%20user&client_id=${config.client_id}&client_secret=${config.client_secret}&code=${code}`,
     {
       method: "POST",
       headers: {

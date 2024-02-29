@@ -12,9 +12,9 @@ function NavBar() {
 
   async function loginToGithub() {
     window.location.assign(
-      `https://github.com/login/oauth/authorize?&client_id=${import.meta.env.VITE_CLIENT_ID}&redirect_uri=${
-        import.meta.env.VITE_REDIRECT_URI
-      }`
+      `https://github.com/login/oauth/authorize?scope=repo%20gist%20user&client_id=${
+        import.meta.env.VITE_CLIENT_ID
+      }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}`
     );
   }
 

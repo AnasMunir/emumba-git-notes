@@ -2,16 +2,15 @@ import { useContext, useEffect } from "react";
 
 import { AuthContext } from "../App";
 import { getToken, getUser } from "../api/user";
+import { Link } from "react-router-dom";
 
 function NavBar() {
-  const { localLogin, setUserInfo, accessToken } = useContext(AuthContext);
-  console.log("accessToken", accessToken);
+  const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
   const query = window.location.search;
   const urlParams = new URLSearchParams(query);
   const code = urlParams.get("code");
-  console.log("code", code);
 
-  async function login() {
+  async function loginToGithub() {
     window.location.assign(
       `https://github.com/login/oauth/authorize?&client_id=${import.meta.env.VITE_CLIENT_ID}&redirect_uri=${
         import.meta.env.VITE_REDIRECT_URI
@@ -40,7 +39,14 @@ function NavBar() {
   return (
     <nav className='top-nav'>
       <div className='nav-text-large'>EMUMBA</div>
-      <button onClick={login}>Login</button>
+
+      {id ? (
+        <Link to={`/${login}`}>
+          <img src={avatar_url} alt={login} height={60} width={60} style={{ borderRadius: "50%" }} />
+        </Link>
+      ) : (
+        <button onClick={loginToGithub}>Login</button>
+      )}
     </nav>
   );
 }

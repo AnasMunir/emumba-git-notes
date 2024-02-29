@@ -10,7 +10,6 @@ export function getToken(code: string): Promise<{
 }
 
 export function getUser(accessToken: string): Promise<TState> {
-  console.log("token", accessToken);
   return axios
     .get(`http://localhost:3000/user`, {
       headers: {

@@ -54,6 +54,8 @@ type TCreateGist = {
   options: AbortSignal;
 };
 
+const accessToken = () => `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`;
+
 export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TGist[]> {
   const params = {
     page: 1,
@@ -89,7 +91,7 @@ export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {
     .get(`gists/${gistId}`, {
       signal,
       headers: {
-        Authorization: import.meta.env.VITE_BEARER_TOKEN,
+        Authorization: accessToken(),
       },
     })
     .then((res) => res.data);
@@ -98,7 +100,7 @@ export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {
 export function createGist({ data, options }: TCreateGist) {
   return baseApi
     .post("gists", data, {
-      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
+      headers: { Authorization: accessToken(), Accept: "application/vnd.github+json" },
       ...options,
     })
     .then((res) => res.data);
@@ -111,9 +113,10 @@ type TUpdateGist = {
 };
 
 export function updateGist({ data, id, options }: TUpdateGist) {
+  console.log("accessToken()", accessToken());
   return baseApi
     .patch(`gists/${id}`, data, {
-      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN, Accept: "application/vnd.github+json" },
+      headers: { Authorization: accessToken(), Accept: "application/vnd.github+json" },
       ...options,
     })
     .then((res) => res.data);
@@ -122,7 +125,7 @@ export function updateGist({ data, id, options }: TUpdateGist) {
 export function deleteGist({ id, options }: TUpdateGist) {
   return baseApi
     .delete(`gists/${id}`, {
-      headers: { Authorization: import.meta.env.VITE_BEARER_TOKEN },
+      headers: { Authorization: accessToken() },
       ...options,
     })
     .then((res) => res.data);

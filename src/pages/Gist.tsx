@@ -19,7 +19,11 @@ function Gist() {
       </div>
       <br />
       <br />
-      <Card content={gistData.files[Object.keys(gistData.files)[0]].content} />
+      <Card
+        gistId={gistData.id}
+        userLogin={gistData.owner.login}
+        content={gistData.files[Object.keys(gistData.files)[0]].content}
+      />
     </>
   );
 }

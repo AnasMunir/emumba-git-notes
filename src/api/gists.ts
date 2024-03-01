@@ -1,3 +1,4 @@
+import { TPaginationLinks, parseLinkHeader } from "../utils/parseLinkHeaders";
 import { baseApi } from "./base";
 
 export type TGist = {
@@ -72,10 +73,14 @@ export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TG
     .then((res) => res.data);
 }
 
-export function getPublicGists(signal: AbortSignal): Promise<TGist[]> {
+export function getPublicGists(
+  signal: AbortSignal,
+  page: string | null,
+  perPage: string | null
+): Promise<{ gists: TGist[]; paginationLinks: TPaginationLinks }> {
   const params = {
-    page: 1,
-    per_page: 10,
+    page: page ? page : 1,
+    per_page: perPage ? perPage : 10,
   };
 
   return baseApi
@@ -83,7 +88,11 @@ export function getPublicGists(signal: AbortSignal): Promise<TGist[]> {
       params,
       signal,
     })
-    .then((res) => res.data);
+    .then((res) => {
+      const paginationLinks = parseLinkHeader(res.headers["link"]);
+
+      return { gists: res.data, paginationLinks };
+    });
 }
 
 export function getGist(gistId: string, signal: AbortSignal): Promise<TGist> {

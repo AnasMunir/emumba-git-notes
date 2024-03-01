@@ -66,7 +66,7 @@ export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TG
       params,
       signal,
       headers: {
-        Authorization: import.meta.env.VITE_BEARER_TOKEN,
+        Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
       },
     })
     .then((res) => res.data);

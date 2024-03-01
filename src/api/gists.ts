@@ -122,7 +122,6 @@ type TUpdateGist = {
 };
 
 export function updateGist({ data, id, options }: TUpdateGist) {
-  console.log("accessToken()", accessToken());
   return baseApi
     .patch(`gists/${id}`, data, {
       headers: { Authorization: accessToken(), Accept: "application/vnd.github+json" },

@@ -7,7 +7,6 @@ import Paginator from "../components/Paginator";
 // TODO: create styles and sub components
 function Gists() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
-  console.log(paginationLinks);
   return (
     <>
       <div className='card-grid'>

@@ -1,17 +1,28 @@
-import "./index.css";
+import { useContext } from "react";
+import "./styles.css";
+import { AuthContext } from "../../App";
+import { Link } from "react-router-dom";
 
 function DropdownMenu() {
+  const { login, html_url } = useContext(AuthContext);
+
   return (
     <div className='dropdown-menu'>
       <div className='overlay'>
         <ul>
-          <li>Signed in as Anas Munir Sheikh Jee</li>
+          <li>Signed in as {login}</li>
           <span className='divider'></span>
-          <li>Your gists</li>
+          <li>
+            <Link to={`/${login}`}>Your gists</Link>
+          </li>
           <li>Starred gists</li>
           <li>Help</li>
           <span className='divider'></span>
-          <li>Your GitHub profile</li>
+          <li>
+            <a href={html_url} target='_blank'>
+              Your GitHub profile
+            </a>
+          </li>
           <li>Sign out</li>
         </ul>
       </div>

@@ -20,6 +20,8 @@ export type TState = {
   email?: string;
   created_at?: string;
   updated_at?: string;
+  repos_url?: string;
+  html_url?: string;
   accessToken?: string | undefined;
   id?: number | null;
   public_gists?: number | null;
@@ -44,6 +46,8 @@ const initialState: TState = {
   following: null,
   created_at: "",
   updated_at: "",
+  repos_url: "",
+  html_url: "",
   accessToken: undefined,
   localLogin: undefined,
   setUserInfo: undefined,

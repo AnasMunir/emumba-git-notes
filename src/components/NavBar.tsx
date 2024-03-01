@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../App";
 import { getToken, getUser } from "../api/user";
 import { Link } from "react-router-dom";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./DropdownMenu/DropdownMenu";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);

@@ -1,11 +1,17 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../App";
 import { getToken, getUser } from "../api/user";
 import { Link } from "react-router-dom";
+import DropdownMenu from "./DropdownMenu";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleMouseClick = () => {
+    setDropdownVisible(!isDropdownVisible);
+  };
   const query = window.location.search;
   const urlParams = new URLSearchParams(query);
   const code = urlParams.get("code");
@@ -37,17 +43,28 @@ function NavBar() {
   }, [accessToken, code]);
 
   return (
-    <nav className='top-nav'>
-      <div className='nav-text-large'>EMUMBA</div>
+    <>
+      <nav className='top-nav'>
+        <div className='nav-text-large'>EMUMBA</div>
 
-      {id ? (
-        <Link to={`/${login}`}>
-          <img src={avatar_url} alt={login} height={60} width={60} style={{ borderRadius: "50%" }} />
-        </Link>
-      ) : (
-        <button onClick={loginToGithub}>Login</button>
-      )}
-    </nav>
+        {id ? (
+          <Link to={`/${login}`}>
+            <img src={avatar_url} alt={login} height={60} width={60} style={{ borderRadius: "50%" }} />
+          </Link>
+        ) : (
+          <button onClick={loginToGithub}>Login</button>
+        )}
+        <img
+          src='https://avatars.githubusercontent.com/u/161824289?v=4'
+          alt='login'
+          height={60}
+          width={60}
+          style={{ borderRadius: "50%" }}
+          onClick={handleMouseClick}
+        />
+      </nav>
+      {isDropdownVisible && <DropdownMenu />}
+    </>
   );
 }
 

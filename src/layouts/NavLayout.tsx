@@ -1,12 +1,16 @@
-import React from "react";
 import NavBar from "../components/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 
 function NavLayout() {
+  const { state } = useNavigation();
+  const isLoading = state === "loading";
   return (
     <>
       <NavBar />
-      <Outlet />
+      <ScrollRestoration />
+      <div className={`container ${isLoading ? "loading" : ""}`}>
+        <Outlet />
+      </div>
     </>
   );
 }

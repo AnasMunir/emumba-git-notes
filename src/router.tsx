@@ -5,41 +5,46 @@ import { gistRoute } from "./pages/Gist";
 import { newGistRoute } from "./pages/NewGist";
 import { editGistRoute } from "./pages/EditGist";
 import { userRoute } from "./pages/User";
+import ErrorPage from "./pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     element: <NavLayout />,
     children: [
       {
-        index: true,
-        loader: () => redirect("/gists"),
-      },
-      {
-        path: ":userLogin",
-        ...userRoute,
-      },
-      {
-        path: "/gists",
+        errorElement: <ErrorPage />,
         children: [
           {
             index: true,
-            ...gistsRoute,
-          },
-          // TODO: create components
-          {
-            path: "new",
-            ...newGistRoute,
+            loader: () => redirect("/gists"),
           },
           {
-            path: ":gistId",
+            path: ":userLogin",
+            ...userRoute,
+          },
+          {
+            path: "/gists",
             children: [
               {
                 index: true,
-                ...gistRoute,
+                ...gistsRoute,
               },
               {
-                path: "edit",
-                ...editGistRoute,
+                path: "new",
+                ...newGistRoute,
+              },
+              {
+                path: ":gistId",
+                children: [
+                  {
+                    index: true,
+                    ...gistRoute,
+                  },
+                  {
+                    path: "edit",
+                    ...editGistRoute,
+                  },
+                ],
               },
             ],
           },

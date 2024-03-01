@@ -3,27 +3,27 @@ import "./styles.css";
 import { AuthContext } from "../../App";
 import { Link } from "react-router-dom";
 
-function DropdownMenu() {
+function DropdownMenu({ linkClicked }: { linkClicked: () => void }) {
   const { login, html_url } = useContext(AuthContext);
 
   return (
     <div className='dropdown-menu'>
       <div className='overlay'>
         <ul>
-          <li>Signed in as {login}</li>
+          <li onClick={linkClicked}>Signed in as {login}</li>
           <span className='divider'></span>
-          <li>
-            <Link to={`/${login}`}>Your gists</Link>
-          </li>
+
+          <Link to={`/${login}`} onClick={linkClicked}>
+            <li>Your gists</li>
+          </Link>
+
           <li>Starred gists</li>
           <li>Help</li>
           <span className='divider'></span>
-          <li>
-            <a href={html_url} target='_blank'>
-              Your GitHub profile
-            </a>
-          </li>
-          <li>Sign out</li>
+          <a href={html_url} target='_blank' onClick={linkClicked}>
+            <li>Your GitHub profile</li>
+          </a>
+          <li onClick={linkClicked}>Sign out</li>
         </ul>
       </div>
     </div>

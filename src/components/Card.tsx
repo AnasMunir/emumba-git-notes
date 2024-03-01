@@ -6,8 +6,10 @@ type TCard = {
   content?: string;
   gistId?: string;
   userLogin?: string;
+  showUserLink?: boolean;
+  showViewLink?: boolean;
 };
-function Card({ url, content, gistId, userLogin }: TCard) {
+function Card({ url, content, gistId, userLogin, showUserLink = true, showViewLink = true }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
   useEffect(() => {
     if (content) {
@@ -36,12 +38,16 @@ function Card({ url, content, gistId, userLogin }: TCard) {
         </div>
       </div>
       <div className='card-footer'>
-        <Link className='btn' to={`/${userLogin}`}>
-          User
-        </Link>
-        <Link className='btn' to={`/gists/${gistId}`}>
-          View
-        </Link>
+        {showUserLink && (
+          <Link className='btn' to={`/${userLogin}`}>
+            User
+          </Link>
+        )}
+        {showViewLink && (
+          <Link className='btn' to={`/gists/${gistId}`}>
+            View
+          </Link>
+        )}
       </div>
     </div>
   );

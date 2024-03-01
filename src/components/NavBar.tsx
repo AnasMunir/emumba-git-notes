@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../App";
 import { getToken, getUser } from "../api/user";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
@@ -44,7 +45,9 @@ function NavBar() {
   return (
     <>
       <nav className='top-nav'>
-        <div className='nav-text-large'>EMUMBA</div>
+        <div className='nav-text-large'>
+          <Link to='/'>EMUMBA Git Notes</Link>
+        </div>
 
         {id ? (
           <img
@@ -52,7 +55,7 @@ function NavBar() {
             alt={login}
             height={40}
             width={40}
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", cursor: "pointer" }}
             onClick={handleMouseClick}
           />
         ) : (
@@ -61,7 +64,7 @@ function NavBar() {
           </button>
         )}
       </nav>
-      {isDropdownVisible && <DropdownMenu />}
+      {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
     </>
   );
 }

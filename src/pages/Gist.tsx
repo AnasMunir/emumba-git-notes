@@ -1,28 +1,34 @@
 import { ActionFunctionArgs, Form, Link, LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
 import { TGist, deleteGist, getGist } from "../api/gists";
 import Card from "../components/Card";
+import { useContext } from "react";
+import { AuthContext } from "../App";
 
 function Gist() {
   const gistData = useLoaderData() as TGist;
+  const { id } = useContext(AuthContext);
 
   return (
     <>
-      <div style={{ display: "flex" }}>
-        <Link to='edit' className='btn'>
-          Edit
-        </Link>
-        <Form method='delete' replace>
-          <button className='btn' type='submit'>
-            Delete
-          </button>
-        </Form>
-      </div>
+      {gistData.owner.id === id && (
+        <div style={{ display: "flex" }}>
+          <Link to='edit' className='btn'>
+            Edit
+          </Link>
+          <Form method='delete' replace>
+            <button className='btn' type='submit'>
+              Delete
+            </button>
+          </Form>
+        </div>
+      )}
       <br />
       <br />
       <Card
         gistId={gistData.id}
         userLogin={gistData.owner.login}
         content={gistData.files[Object.keys(gistData.files)[0]].content}
+        showViewLink={false}
       />
     </>
   );

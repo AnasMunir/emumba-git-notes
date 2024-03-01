@@ -57,10 +57,15 @@ type TCreateGist = {
 
 const accessToken = () => `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`;
 
-export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TGist[]> {
+export function getUserGists(
+  userLogin: string,
+  page: string | null,
+  perPage: string | null,
+  signal: AbortSignal
+): Promise<{ gists: TGist[]; paginationLinks: TPaginationLinks }> {
   const params = {
-    page: 1,
-    per_page: 10,
+    page: page ? page : 1,
+    per_page: perPage ? perPage : 10,
   };
   return baseApi
     .get(`/users/${userLogin}/gists`, {
@@ -70,7 +75,11 @@ export function getUserGists(userLogin: string, signal: AbortSignal): Promise<TG
         Authorization: accessToken(),
       },
     })
-    .then((res) => res.data);
+    .then((res) => {
+      const paginationLinks = parseLinkHeader(res.headers["link"]);
+
+      return { gists: res.data, paginationLinks };
+    });
 }
 
 export function getPublicGists(

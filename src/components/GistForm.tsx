@@ -60,6 +60,7 @@ function GistForm({ method, errors, defaultValues }: IGistForm) {
           <textarea
             name='content'
             id='content'
+            rows={15}
             placeholder='Enter file content..'
             defaultValue={defaultValues?.content}></textarea>
         </FormGroup>

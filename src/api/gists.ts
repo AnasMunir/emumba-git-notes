@@ -1,3 +1,4 @@
+import { getAccessToken } from "../utils/getAccessToken";
 import { TPaginationLinks, parseLinkHeader } from "../utils/parseLinkHeaders";
 import { baseApi } from "./base";
 
@@ -71,9 +72,11 @@ export function getUserGists(
     .get(`/users/${userLogin}/gists`, {
       params,
       signal,
-      headers: {
-        Authorization: accessToken(),
-      },
+      headers: getAccessToken()
+        ? {
+            Authorization: getAccessToken(),
+          }
+        : {},
     })
     .then((res) => {
       const paginationLinks = parseLinkHeader(res.headers["link"]);

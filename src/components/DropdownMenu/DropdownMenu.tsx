@@ -4,7 +4,7 @@ import { AuthContext } from "../../App";
 import { Link } from "react-router-dom";
 
 function DropdownMenu({ linkClicked }: { linkClicked: () => void }) {
-  const { login, html_url } = useContext(AuthContext);
+  const { login, html_url, logout } = useContext(AuthContext);
 
   return (
     <div className='dropdown-menu'>
@@ -23,7 +23,15 @@ function DropdownMenu({ linkClicked }: { linkClicked: () => void }) {
           <a href={html_url} target='_blank' onClick={linkClicked}>
             <li>Your GitHub profile</li>
           </a>
-          <li onClick={linkClicked}>Sign out</li>
+          <Link to='/'>
+            <li
+              onClick={() => {
+                logout?.();
+                linkClicked();
+              }}>
+              Sign out
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

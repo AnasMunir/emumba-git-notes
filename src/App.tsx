@@ -29,6 +29,7 @@ export type TState = {
   following?: number | null;
   localLogin?: (accessToken: string) => void;
   setUserInfo?: (payload: TState) => void;
+  logout?: () => void;
 };
 const initialState: TState = {
   login: "",
@@ -51,17 +52,19 @@ const initialState: TState = {
   accessToken: undefined,
   localLogin: undefined,
   setUserInfo: undefined,
+  logout: undefined,
 };
 
 export const AuthContext = createContext<TState>(initialState);
-// export const AuthDispatchContext = createContext<TState>(initialState);
 
-function reducer(state: TState, { type, payload }: { type: ACTIONS; payload: TState }) {
+function reducer(state: TState, { type, payload }: { type: ACTIONS; payload?: TState }) {
   switch (type) {
     case ACTIONS.LOGIN:
       return { ...state, accessToken: payload?.accessToken };
     case ACTIONS.SET_USER:
       return { ...state, ...payload };
+    case ACTIONS.LOGOUT:
+      return { ...initialState };
     default:
       throw new Error("yo");
   }
@@ -84,9 +87,15 @@ function App() {
     dispatch({ type: ACTIONS.SET_USER, payload });
   }
 
+  function logout() {
+    dispatch({ type: ACTIONS.LOGOUT });
+  }
+
   useEffect(() => {
     if (state.accessToken !== undefined) {
       localStorage.setItem("ACCESS_TOKEN", state.accessToken);
+    } else {
+      localStorage.removeItem("ACCESS_TOKEN");
     }
   }, [state.accessToken]);
 
@@ -96,6 +105,7 @@ function App() {
         ...state,
         localLogin,
         setUserInfo,
+        logout,
       }}>
       <RouterProvider router={router} />
     </AuthContext.Provider>

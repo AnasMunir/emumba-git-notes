@@ -22,7 +22,7 @@ function Gists() {
           />
         ))}
       </div>
-      <div>
+      <div style={{ marginTop: "10px" }}>
         <Paginator links={paginationLinks.links} />
       </div>
     </>

@@ -5,15 +5,17 @@ import "./styles.css";
 
 type TCard = {
   gist: TGist;
+  showEnterFile?: boolean;
   showUserLink?: boolean;
 };
-function Card({ gist, showUserLink = true }: TCard) {
+function Card({ gist, showEnterFile = false, showUserLink = true }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
   const { owner, created_at } = gist;
   const file = gist.files[Object.keys(gist.files)[0]];
   useEffect(() => {
     if (file.content) {
       return setGistFile(file.content?.split(/\r?\n/, 13));
+      // return setGistFile(file.content?.split(/\r?\n/));
     } else {
       fetch(file.raw_url)
         .then((response) => {
@@ -21,6 +23,7 @@ function Card({ gist, showUserLink = true }: TCard) {
         })
         .then((data) => {
           setGistFile(data.split(/\r?\n/, 13));
+          // setGistFile(data.split(/\r?\n/));
         });
     }
   }, [file.content, file.raw_url]);

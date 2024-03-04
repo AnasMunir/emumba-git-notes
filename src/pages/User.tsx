@@ -1,5 +1,5 @@
 import { TGist, getUserGists } from "../api/gists";
-import { Link, LoaderFunctionArgs, useLoaderData, useParams } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData, useParams } from "react-router-dom";
 import Card from "../components/Card/Card";
 import Paginator from "../components/Paginator";
 import { TPaginationLinks } from "../utils/parseLinkHeaders";
@@ -10,13 +10,13 @@ function User() {
   const { userLogin } = useParams();
   const userData = gists[0].owner;
   return (
-    <div style={{ display: "flex" }}>
-      <div>
-        <Avatar src={userData.avatar_url} alt={userLogin!} size='large' />
-      </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <Avatar src={userData.avatar_url} alt={userLogin!} size='large' />
+      <div style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}>
         {gists.map((gist) => (
-          <Card key={gist.id} gist={gist} showUserLink={true} />
+          <div style={{ padding: "10px" }} key={gist.id}>
+            <Card gist={gist} showUserLink={true} />
+          </div>
         ))}
         <div style={{ marginTop: "10px" }}>
           <Paginator links={paginationLinks.links} />

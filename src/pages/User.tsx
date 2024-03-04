@@ -16,14 +16,7 @@ function User() {
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {gists.map((gist) => (
-          <Card
-            key={gist.id}
-            url={gist.files[Object.keys(gist.files)[0]].raw_url}
-            content={gist.files[Object.keys(gist.files)[0]].content}
-            gistId={gist.id}
-            userLogin={gist.owner.login}
-            showUserLink={false}
-          />
+          <Card key={gist.id} gist={gist} showUserLink={false} />
         ))}
         <div style={{ marginTop: "10px" }}>
           <Paginator links={paginationLinks.links} />

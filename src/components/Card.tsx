@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { TGist } from "../api/gists";
+import GistInfo from "./GistInfo/GistInfo";
 
 type TCard = {
-  url?: string;
-  content?: string;
-  gistId?: string;
-  userLogin?: string;
+  gist: TGist;
   showUserLink?: boolean;
-  showViewLink?: boolean;
 };
-function Card({ url, content, gistId, userLogin, showUserLink = true, showViewLink = true }: TCard) {
+function Card({ gist, showUserLink = true }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
+  const { id, owner, created_at } = gist;
+  const file = gist.files[Object.keys(gist.files)[0]];
   useEffect(() => {
-    if (content) {
-      return setGistFile(content?.split(/\r?\n/, 13));
-    } else if (url) {
-      fetch(url)
+    if (file.content) {
+      return setGistFile(file.content?.split(/\r?\n/, 13));
+    } else {
+      fetch(file.raw_url)
         .then((response) => {
           return response.text();
         })
@@ -23,7 +23,7 @@ function Card({ url, content, gistId, userLogin, showUserLink = true, showViewLi
           setGistFile(data.split(/\r?\n/, 13));
         });
     }
-  }, [url, content]);
+  }, [file.content, file.raw_url]);
 
   return (
     <div className='card'>
@@ -37,18 +37,11 @@ function Card({ url, content, gistId, userLogin, showUserLink = true, showViewLi
           ))}
         </div>
       </div>
-      <div className='card-footer'>
-        {showUserLink && (
-          <Link className='btn' to={`/${userLogin}`}>
-            User
-          </Link>
-        )}
-        {showViewLink && (
-          <Link className='btn' to={`/gists/${gistId}`}>
-            View
-          </Link>
-        )}
-      </div>
+      {showUserLink && (
+        <div className='card-footer'>
+          <GistInfo gistId={gist.id} username={owner.login} filename={file.filename} createdAt={created_at} />
+        </div>
+      )}
     </div>
   );
 }

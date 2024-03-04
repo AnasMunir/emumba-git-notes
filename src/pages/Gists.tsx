@@ -14,12 +14,7 @@ function Gists() {
           New
         </Link>
         {gists.map((gist) => (
-          <Card
-            key={gist.id}
-            url={gist.files[Object.keys(gist.files)[0]].raw_url}
-            gistId={gist.id}
-            userLogin={gist.owner.login}
-          />
+          <Card key={gist.id} gist={gist} />
         ))}
       </div>
       <div style={{ marginTop: "10px" }}>

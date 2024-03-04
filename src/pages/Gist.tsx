@@ -5,12 +5,12 @@ import { useContext } from "react";
 import { AuthContext } from "../App";
 
 function Gist() {
-  const gistData = useLoaderData() as TGist;
+  const gist = useLoaderData() as TGist;
   const { id } = useContext(AuthContext);
 
   return (
     <>
-      {gistData.owner.id === id && (
+      {gist.owner.id === id && (
         <div style={{ display: "flex" }}>
           <Link to='edit' className='btn'>
             Edit
@@ -24,12 +24,7 @@ function Gist() {
       )}
       <br />
       <br />
-      <Card
-        gistId={gistData.id}
-        userLogin={gistData.owner.login}
-        content={gistData.files[Object.keys(gistData.files)[0]].content}
-        showViewLink={false}
-      />
+      <Card gist={gist} />
     </>
   );
 }

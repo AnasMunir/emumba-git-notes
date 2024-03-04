@@ -1,0 +1,32 @@
+.card {
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  max-height: 350px;
+  width: 400px;
+  max-width: 400px;
+  justify-content: space-between;
+}
+
+.card-body {
+  max-height: 260px;
+  max-width: 370px;
+}
+
+.card-body p {
+  margin: 0;
+  font-size: small;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-footer {
+  border-top: 1px solid lightgray;
+  padding: 0;
+  padding-top: 10px;
+}

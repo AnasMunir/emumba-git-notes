@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { TGist } from "../api/gists";
-import GistInfo from "./GistInfo/GistInfo";
+import { TGist } from "../../api/gists";
+import GistInfo from "../GistInfo/GistInfo";
+import "./styles.css";
 
 type TCard = {
   gist: TGist;
@@ -9,7 +9,7 @@ type TCard = {
 };
 function Card({ gist, showUserLink = true }: TCard) {
   const [gistFile, setGistFile] = useState<string[]>([]);
-  const { id, owner, created_at } = gist;
+  const { owner, created_at } = gist;
   const file = gist.files[Object.keys(gist.files)[0]];
   useEffect(() => {
     if (file.content) {
@@ -28,18 +28,22 @@ function Card({ gist, showUserLink = true }: TCard) {
   return (
     <div className='card'>
       <div className='card-body'>
-        <div className='card-preview-text'>
-          {gistFile.map((line, index) => (
-            <div key={index} style={{ display: "flex", fontSize: "12px", height: 20 }}>
-              <p style={{ width: 30, color: "#6e7681", paddingRight: "5px" }}>{index + 1}</p>
-              <p>{line}</p>
-            </div>
-          ))}
-        </div>
+        {gistFile.map((line, index) => (
+          <div key={index} style={{ display: "flex", fontSize: "12px", height: 20 }}>
+            <p style={{ width: 30, color: "#6e7681", paddingRight: "5px" }}>{index + 1}</p>
+            <p>{line}</p>
+          </div>
+        ))}
       </div>
       {showUserLink && (
         <div className='card-footer'>
-          <GistInfo gistId={gist.id} username={owner.login} filename={file.filename} createdAt={created_at} />
+          <GistInfo
+            src={owner.avatar_url}
+            gistId={gist.id}
+            username={owner.login}
+            filename={file.filename}
+            createdAt={created_at}
+          />
         </div>
       )}
     </div>

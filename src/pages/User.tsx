@@ -3,6 +3,7 @@ import { Link, LoaderFunctionArgs, useLoaderData, useParams } from "react-router
 import Card from "../components/Card";
 import Paginator from "../components/Paginator";
 import { TPaginationLinks } from "../utils/parseLinkHeaders";
+import Avatar from "../components/Avatar";
 
 function User() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
@@ -11,7 +12,7 @@ function User() {
   return (
     <div style={{ display: "flex" }}>
       <div>
-        <img src={userData.avatar_url} alt={userLogin} height={260} width={260} style={{ borderRadius: "50%" }} />
+        <Avatar src={userData.avatar_url} alt={userLogin!} size='large' />
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         {gists.map((gist) => (

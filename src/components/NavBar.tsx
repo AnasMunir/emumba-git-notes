@@ -4,6 +4,7 @@ import { AuthContext } from "../App";
 import { getToken, getUser } from "../api/user";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import { Link } from "react-router-dom";
+import Avatar from "./Avatar";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
@@ -50,14 +51,7 @@ function NavBar() {
         </div>
 
         {id ? (
-          <img
-            src={avatar_url}
-            alt={login}
-            height={40}
-            width={40}
-            style={{ borderRadius: "50%", cursor: "pointer" }}
-            onClick={handleMouseClick}
-          />
+          <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
         ) : (
           <button className='btn' onClick={loginToGithub}>
             Login

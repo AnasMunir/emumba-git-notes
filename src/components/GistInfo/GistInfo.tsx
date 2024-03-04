@@ -4,11 +4,12 @@ import "./styles.css";
 
 interface IGistInfo {
   gistId: string;
+  src: string;
   username: string;
   filename: string;
   createdAt: string;
 }
-function GistInfo({ gistId, username, filename, createdAt }: IGistInfo) {
+function GistInfo({ gistId, src, username, filename, createdAt }: IGistInfo) {
   const date = new Date(createdAt);
   const formattedDateTime = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
@@ -17,7 +18,7 @@ function GistInfo({ gistId, username, filename, createdAt }: IGistInfo) {
   return (
     <div className='gist'>
       <div>
-        <Avatar src='https://avatars.githubusercontent.com/u/8572727?v=4' alt='anas' />
+        <Avatar src={src} alt={username} />
       </div>
       <div className='info'>
         {username && filename && (

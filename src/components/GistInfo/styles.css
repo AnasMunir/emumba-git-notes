@@ -1,4 +1,4 @@
-.gist-info {
+.gist {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -6,23 +6,28 @@
   max-height: 55px;
 }
 
-.title {
+.info {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  margin-left: 10px;
+}
+
+.title {
+  margin: 0;
   cursor: pointer;
   font-size: medium;
   color: blue;
-}
-
-.title p {
-  margin: 0;
-}
-
-#filename {
-  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title span {
+  font-weight: bolder;
+}
+
+.subtitle p {
   color: gray;
   font-size: x-small;
   margin: 0;

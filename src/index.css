@@ -115,7 +115,7 @@ body {
   border-top: 1px solid black;
   display: flex;
   /* padding: var(--padding); */
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 0.5rem;
   flex-shrink: 0;
 }

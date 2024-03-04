@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, Form, Link, LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
 import { TGist, deleteGist, getGist } from "../api/gists";
-import Card from "../components/Card";
+import Card from "../components/Card/Card";
 import { useContext } from "react";
 import { AuthContext } from "../App";
 

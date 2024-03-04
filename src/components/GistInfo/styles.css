@@ -1,0 +1,30 @@
+.gist-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 320px;
+  max-height: 55px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  font-size: medium;
+  color: blue;
+}
+
+.title p {
+  margin: 0;
+}
+
+#filename {
+  font-weight: bolder;
+}
+
+.title span {
+  color: gray;
+  font-size: x-small;
+  margin: 0;
+  margin-top: 5px;
+}

@@ -1,12 +1,20 @@
 interface IAvatar {
-  url: string;
-  userName: string;
-  size: "small" | "large";
+  src: string;
+  alt: string;
+  size?: "small" | "large";
+  onClick?: () => void;
 }
 
-function Avatar({ url, userName, size }: IAvatar) {
+function Avatar({ src, alt, size = "small", onClick }: IAvatar) {
   return (
-    <img src={url} alt={userName} height={avatarSize(size)} width={avatarSize(size)} style={{ borderRadius: "50%" }} />
+    <img
+      src={src}
+      alt={alt}
+      height={avatarSize(size)}
+      width={avatarSize(size)}
+      style={{ borderRadius: "50%", cursor: "pointer" }}
+      onClick={onClick}
+    />
   );
 }
 
@@ -15,7 +23,7 @@ function avatarSize(size: "small" | "large"): number {
     return 260;
   }
   if (size === "small") {
-    return 40;
+    return 50;
   }
   return 40;
 }

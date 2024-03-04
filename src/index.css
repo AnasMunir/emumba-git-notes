@@ -10,50 +10,8 @@ body {
     "Helvetica Neue", sans-serif;
 }
 
-.top-nav {
-  color: hsl(200, 20%, 95%);
-  background: hsl(201, 100%, 4%);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  margin-bottom: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-  position: relative;
-}
-
-.top-nav a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.nav-list {
-  margin: 0;
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  align-items: stretch;
-}
-
-.nav-list a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.nav-list a:hover,
-.nav-list a:focus {
-  text-decoration: underline;
-}
-
-.nav-text-large {
-  font-size: 2rem;
-}
-
 .container {
-  max-width: 2000px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 0 2rem;
   margin-bottom: 2rem;
@@ -66,8 +24,8 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
-  gap: 7rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
+  gap: 2rem;
 }
 
 .form {

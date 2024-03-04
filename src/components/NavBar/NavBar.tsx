@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 
-import { AuthContext } from "../App";
-import { getToken, getUser } from "../api/user";
-import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import { AuthContext } from "../../App";
+import { getToken, getUser } from "../../api/user";
+import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Link } from "react-router-dom";
-import Avatar from "./Avatar";
+import Avatar from "../Avatar";
+import "./styles.css";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
@@ -46,17 +47,19 @@ function NavBar() {
   return (
     <>
       <nav className='top-nav'>
-        <div className='nav-text-large'>
-          <Link to='/'>EMUMBA Git Notes</Link>
-        </div>
+        <div className='nav-content'>
+          <div className='nav-text-large'>
+            <Link to='/'>EMUMBA Git Notes</Link>
+          </div>
 
-        {id ? (
-          <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
-        ) : (
-          <button className='btn' onClick={loginToGithub}>
-            Login
-          </button>
-        )}
+          {id ? (
+            <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
+          ) : (
+            <button className='btn' onClick={loginToGithub}>
+              Login
+            </button>
+          )}
+        </div>
       </nav>
       {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
     </>

@@ -1,4 +1,4 @@
-import NavBar from "../components/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 
 function NavLayout() {

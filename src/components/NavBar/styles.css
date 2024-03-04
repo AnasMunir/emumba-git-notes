@@ -1,0 +1,29 @@
+.top-nav {
+  color: hsl(200, 20%, 95%);
+  background: hsl(201, 100%, 4%);
+
+  gap: 1rem;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  position: relative;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.nav-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-text-large {
+  font-size: 2rem;
+}

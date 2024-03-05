@@ -108,6 +108,28 @@ body {
   justify-content: flex-end;
 }
 
+.icon-btn {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+}
+.icon-btn svg path,
+.icon-btn svg polygon {
+  stroke: black;
+}
+.icon-btn svg {
+  margin-right: 0.2em;
+}
+.icon-btn:hover svg path,
+.icon-btn:hover svg polygon {
+  stroke: green;
+}
+.icon-btn:hover {
+  color: green;
+  fill: green;
+}
+
 .btn {
   text-decoration: none;
   color: hsl(36, 20%, 95%);

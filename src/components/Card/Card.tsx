@@ -15,7 +15,6 @@ function Card({ gist, showEnterFile = false, showUserLink = true }: TCard) {
   useEffect(() => {
     if (file.content) {
       return setGistFile(file.content?.split(/\r?\n/, 13));
-      // return setGistFile(file.content?.split(/\r?\n/));
     } else {
       fetch(file.raw_url)
         .then((response) => {
@@ -23,7 +22,6 @@ function Card({ gist, showEnterFile = false, showUserLink = true }: TCard) {
         })
         .then((data) => {
           setGistFile(data.split(/\r?\n/, 13));
-          // setGistFile(data.split(/\r?\n/));
         });
     }
   }, [file.content, file.raw_url]);

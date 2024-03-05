@@ -4,21 +4,21 @@ import Card from "../components/Card/Card";
 import { TPaginationLinks } from "../utils/parseLinkHeaders";
 import Paginator from "../components/Paginator";
 import { useState } from "react";
+import ListIcon from "../components/icons/ListIcon";
+import GridIcon from "../components/icons/GridIcon";
 
 function Gists() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
   const [displayFormat, setDisplayForm] = useState<"cards" | "list">("cards");
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <p
-          style={{ borderRight: "1px solid lightgray", padding: "0.5rem", cursor: "pointer" }}
-          onClick={() => setDisplayForm("cards")}>
-          Card
-        </p>
-        <p style={{ padding: "0.5rem", cursor: "pointer" }} onClick={() => setDisplayForm("list")}>
-          List
-        </p>
+      <div className='listing'>
+        <div onClick={() => setDisplayForm("cards")}>
+          <GridIcon fill={displayFormat === "cards" ? "green" : ""} />
+        </div>
+        <div onClick={() => setDisplayForm("list")}>
+          <ListIcon fill={displayFormat === "list" ? "green" : ""} />
+        </div>
       </div>
       {displayFormat === "cards" ? (
         <div className='card-grid'>

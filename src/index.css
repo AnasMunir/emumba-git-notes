@@ -22,6 +22,20 @@ body {
   pointer-events: none;
 }
 
+.listing {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
+}
+.listing div {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.listing div:first-child {
+  border-right: 2px solid lightgray;
+}
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));

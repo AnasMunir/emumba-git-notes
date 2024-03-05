@@ -3,21 +3,22 @@ import { TGist, getPublicGists } from "../api/gists";
 import Card from "../components/Card/Card";
 import { TPaginationLinks } from "../utils/parseLinkHeaders";
 import Paginator from "../components/Paginator";
-import { useState } from "react";
+import { useContext } from "react";
 import ListIcon from "../components/icons/ListIcon";
 import GridIcon from "../components/icons/GridIcon";
 import GistTable from "../components/GistTable/GistTable";
+import { UserContext } from "../App";
 
 function Gists() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
-  const [displayFormat, setDisplayForm] = useState<"cards" | "list">("cards");
+  const { displayFormat, setDisplayFormat } = useContext(UserContext);
   return (
     <>
       <div className='listing'>
-        <div onClick={() => setDisplayForm("cards")}>
+        <div onClick={() => setDisplayFormat?.("cards")}>
           <GridIcon fill={displayFormat === "cards" ? "green" : ""} />
         </div>
-        <div onClick={() => setDisplayForm("list")}>
+        <div onClick={() => setDisplayFormat?.("list")}>
           <ListIcon fill={displayFormat === "list" ? "green" : ""} />
         </div>
       </div>

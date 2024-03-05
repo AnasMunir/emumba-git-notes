@@ -5,9 +5,11 @@ import { createContext, useEffect, useReducer } from "react";
 export enum ACTIONS {
   LOGIN = "LOGIN",
   SET_USER = "SET_USER",
+  SET_DISPLAY_FORMAT = "SET_DISPLAY_FORMAT",
   LOGOUT = "LOGOUT",
 }
 
+type TFormat = "cards" | "list";
 export type TState = {
   login?: string;
   node_id?: string;
@@ -27,9 +29,11 @@ export type TState = {
   public_gists?: number | null;
   followers?: number | null;
   following?: number | null;
+  displayFormat?: TFormat;
   localLogin?: (accessToken: string) => void;
   setUserInfo?: (payload: TState) => void;
   logout?: () => void;
+  setDisplayFormat?: (displayFormat: TFormat) => void;
 };
 const initialState: TState = {
   login: "",
@@ -50,9 +54,11 @@ const initialState: TState = {
   repos_url: "",
   html_url: "",
   accessToken: undefined,
+  displayFormat: "cards",
   localLogin: undefined,
   setUserInfo: undefined,
   logout: undefined,
+  setDisplayFormat: undefined,
 };
 
 export const UserContext = createContext<TState>(initialState);
@@ -63,6 +69,8 @@ function reducer(state: TState, { type, payload }: { type: ACTIONS; payload?: TS
       return { ...state, accessToken: payload?.accessToken };
     case ACTIONS.SET_USER:
       return { ...state, ...payload };
+    case ACTIONS.SET_DISPLAY_FORMAT:
+      return { ...state, displayFormat: payload?.displayFormat };
     case ACTIONS.LOGOUT:
       return { ...initialState };
     default:
@@ -71,10 +79,11 @@ function reducer(state: TState, { type, payload }: { type: ACTIONS; payload?: TS
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState, (state) => {
+  const [state, dispatch] = useReducer(reducer, initialState, (state: TState) => {
     return {
       ...state,
       accessToken: localStorage.getItem("ACCESS_TOKEN") || state.accessToken,
+      displayFormat: (localStorage.getItem("DISPLAY_FORMAT") as TFormat) || state.displayFormat,
     };
   });
 
@@ -91,6 +100,10 @@ function App() {
     dispatch({ type: ACTIONS.LOGOUT });
   }
 
+  function setDisplayFormat(displayFormat: TFormat) {
+    dispatch({ type: ACTIONS.SET_DISPLAY_FORMAT, payload: { displayFormat } });
+  }
+
   useEffect(() => {
     if (state.accessToken !== undefined) {
       localStorage.setItem("ACCESS_TOKEN", state.accessToken);
@@ -99,6 +112,14 @@ function App() {
     }
   }, [state.accessToken]);
 
+  useEffect(() => {
+    if (state.displayFormat !== undefined) {
+      localStorage.setItem("DISPLAY_FORMAT", state.displayFormat);
+    } else {
+      localStorage.removeItem("DISPLAY_FORMAT");
+    }
+  }, [state.displayFormat]);
+
   return (
     <UserContext.Provider
       value={{
@@ -106,6 +127,7 @@ function App() {
         localLogin,
         setUserInfo,
         logout,
+        setDisplayFormat,
       }}>
       <RouterProvider router={router} />
     </UserContext.Provider>

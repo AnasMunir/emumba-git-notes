@@ -51,19 +51,22 @@ function NavBar() {
           <div className='nav-text-large'>
             <Link to='/'>EMUMBA Git Notes</Link>
           </div>
-
-          {id ? (
-            <div style={{ position: "relative" }}>
-              <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
-            </div>
-          ) : (
-            <button className='btn' onClick={loginToGithub}>
-              Login
-            </button>
-          )}
+          <div>
+            {id ? (
+              <>
+                <div style={{ position: "relative" }}>
+                  <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
+                  {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
+                </div>
+              </>
+            ) : (
+              <button className='btn' onClick={loginToGithub}>
+                Login
+              </button>
+            )}
+          </div>
         </div>
       </nav>
-      {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
     </>
   );
 }

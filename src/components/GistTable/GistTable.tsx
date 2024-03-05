@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { TGist } from "../../api/gists";
 import { getFormattedDate, getFormattedTime } from "../../utils/formatDate";
 import Avatar from "../Avatar";
@@ -10,23 +11,29 @@ function GistTable({ gists }: { gists: TGist[] }) {
         <tr>
           <th></th>
           <th>Name</th>
+          <th>Filename</th>
+          <th>Language</th>
           <th>Date</th>
           <th>Time</th>
-          <th>Language</th>
-          <th>Filename</th>
         </tr>
       </thead>
       <tbody>
         {gists.map((gist) => (
           <tr key={gist.id} style={{ overflow: "hidden" }}>
             <td>
-              <Avatar src={gist.owner.avatar_url} alt={gist.owner.login} />
+              <Link to={`/${gist.owner.login}`}>
+                <Avatar src={gist.owner.avatar_url} alt={gist.owner.login} />
+              </Link>
             </td>
-            <td>{gist.owner.login}</td>
+            <td>
+              <Link to={`/${gist.owner.login}`}>{gist.owner.login}</Link>
+            </td>
+            <td>
+              <Link to={`${gist.id}`}>{gist.files[Object.keys(gist.files)[0]].filename}</Link>
+            </td>
+            <td>{gist.files[Object.keys(gist.files)[0]].language}</td>
             <td>{getFormattedDate(gist.created_at, "medium")}</td>
             <td>{getFormattedTime(gist.created_at, "short")}</td>
-            <td>{gist.files[Object.keys(gist.files)[0]].language}</td>
-            <td>{gist.files[Object.keys(gist.files)[0]].filename}</td>
           </tr>
         ))}
       </tbody>

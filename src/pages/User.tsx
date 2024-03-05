@@ -24,7 +24,7 @@ function User() {
         <Avatar src={user.avatar_url} alt={userLogin!} size='large' />
         <p>{user.login}</p>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", overflow: "hidden", padding: "50px" }}>
+      <div style={{ width: "100%", display: "flex", flexDirection: "column", overflow: "hidden", padding: "50px" }}>
         {gists.map((gist) => (
           <div style={{ padding: "10px" }} key={gist.id}>
             <div style={{ margin: "15px 0px" }}>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import "./styles.css";
+import { getFormattedDate } from "../../utils/formatDate";
 
 interface IGistInfo {
   gistId: string;
@@ -11,9 +12,7 @@ interface IGistInfo {
 }
 function GistInfo({ gistId, src, username, filename, createdAt }: IGistInfo) {
   const date = new Date(createdAt);
-  const formattedDateTime = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "full",
-  }).format(date.toString() === "Invalid Date" ? undefined : date);
+  const formattedDateTime = getFormattedDate(createdAt, "full");
 
   return (
     <div className='gist'>

@@ -73,7 +73,7 @@ export function getUserGists(
 ): Promise<{ gists: TGist[]; paginationLinks: TPaginationLinks }> {
   const params = {
     page: page ? page : 1,
-    per_page: perPage ? perPage : 10,
+    per_page: perPage ? perPage : 12,
   };
   return baseApi
     .get(`/users/${userLogin}/gists`, {
@@ -97,7 +97,7 @@ export function getPublicGists(
 ): Promise<{ gists: TGist[]; paginationLinks: TPaginationLinks }> {
   const params = {
     page: page ? page : 1,
-    per_page: perPage ? perPage : 10,
+    per_page: perPage ? perPage : 12,
   };
 
   return baseApi

@@ -6,6 +6,9 @@ import Paginator from "../components/Paginator";
 import { useState } from "react";
 import ListIcon from "../components/icons/ListIcon";
 import GridIcon from "../components/icons/GridIcon";
+import Avatar from "../components/Avatar";
+import { getFormattedDate, getFormattedTime } from "../utils/formatDate";
+import GistTable from "../components/GistTable/GistTable";
 
 function Gists() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
@@ -27,7 +30,7 @@ function Gists() {
           ))}
         </div>
       ) : (
-        <div></div>
+        <GistTable gists={gists} />
       )}
       <div style={{ marginTop: "20px" }}>
         <Paginator links={paginationLinks.links} />

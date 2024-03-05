@@ -36,6 +36,7 @@ body {
 .listing div:first-child {
   border-right: 2px solid lightgray;
 }
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));

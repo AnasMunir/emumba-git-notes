@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import "./styles.css";
-import { AuthContext } from "../../App";
+import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
 
 function DropdownMenu({ linkClicked }: { linkClicked: () => void }) {
-  const { login, html_url, logout } = useContext(AuthContext);
+  const { login, html_url, logout } = useContext(UserContext);
 
   return (
     <div className='dropdown-menu'>

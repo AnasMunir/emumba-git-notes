@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import { AuthContext } from "../../App";
+import { UserContext } from "../../App";
 import { getToken, getUser } from "../../api/user";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import Avatar from "../Avatar";
 import "./styles.css";
 
 function NavBar() {
-  const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(AuthContext);
+  const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(UserContext);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const handleMouseClick = () => {

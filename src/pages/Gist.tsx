@@ -2,11 +2,11 @@ import { ActionFunctionArgs, Form, Link, LoaderFunctionArgs, redirect, useLoader
 import { TGist, deleteGist, getGist } from "../api/gists";
 import Card from "../components/Card/Card";
 import { useContext } from "react";
-import { AuthContext } from "../App";
+import { UserContext } from "../App";
 
 function Gist() {
   const gist = useLoaderData() as TGist;
-  const { id } = useContext(AuthContext);
+  const { id } = useContext(UserContext);
 
   return (
     <>

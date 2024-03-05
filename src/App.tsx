@@ -55,7 +55,7 @@ const initialState: TState = {
   logout: undefined,
 };
 
-export const AuthContext = createContext<TState>(initialState);
+export const UserContext = createContext<TState>(initialState);
 
 function reducer(state: TState, { type, payload }: { type: ACTIONS; payload?: TState }) {
   switch (type) {
@@ -100,7 +100,7 @@ function App() {
   }, [state.accessToken]);
 
   return (
-    <AuthContext.Provider
+    <UserContext.Provider
       value={{
         ...state,
         localLogin,
@@ -108,7 +108,7 @@ function App() {
         logout,
       }}>
       <RouterProvider router={router} />
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
 }
 

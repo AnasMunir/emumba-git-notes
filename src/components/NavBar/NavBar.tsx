@@ -53,7 +53,9 @@ function NavBar() {
           </div>
 
           {id ? (
-            <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
+            <div style={{ position: "relative" }}>
+              <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
+            </div>
           ) : (
             <button className='btn' onClick={loginToGithub}>
               Login

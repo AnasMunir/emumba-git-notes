@@ -44,7 +44,7 @@ function Gist() {
           </div>
         )}
       </div>
-      <Card gist={gist} />
+      <Card gist={gist} showUserLink={false} showEnterFile />
     </>
   );
 }

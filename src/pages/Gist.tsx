@@ -6,6 +6,7 @@ import { UserContext } from "../App";
 import GistInfo from "../components/GistInfo/GistInfo";
 import EditIcon from "../components/icons/EditIcon";
 import DeleteIcon from "../components/icons/DeleteIcon";
+import StarIcon from "../components/icons/StarIcon";
 
 function Gist() {
   const gist = useLoaderData() as TGist;
@@ -22,7 +23,7 @@ function Gist() {
           createdAt={gist.created_at}
         />
         {gist.owner.id === id && (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <Link to='edit'>
               <button className='icon-btn'>
                 <EditIcon />
@@ -33,6 +34,11 @@ function Gist() {
               <button className='icon-btn' type='submit'>
                 <DeleteIcon />
                 Delete
+              </button>
+            </Form>
+            <Form method='post' replace>
+              <button className='icon-btn'>
+                <StarIcon /> Stars <div>{}</div>
               </button>
             </Form>
           </div>

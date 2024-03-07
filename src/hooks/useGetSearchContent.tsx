@@ -5,5 +5,6 @@ export const useGetSearchContent = (searchTerm: string) => {
   return useQuery({
     queryKey: ["search", searchTerm],
     queryFn: () => searchUsers(searchTerm),
+    enabled: Boolean(searchTerm),
   });
 };

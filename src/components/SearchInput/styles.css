@@ -1,7 +1,7 @@
 .search-input {
   float: right;
+  width: 300px;
   padding: 6px;
-  margin-top: 8px;
   margin-right: 16px;
   border: none;
   font-size: 17px;
@@ -13,8 +13,6 @@
 }
 
 .search-input:focus {
-  /* border: 1px solid white;
-  color: white; */
   opacity: 1;
   outline: none;
 }

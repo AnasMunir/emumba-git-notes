@@ -1,0 +1,22 @@
+.search-list {
+  display: flex;
+  align-items: center;
+  background: var(--background);
+  padding: 10px;
+  color: black;
+  font-size: medium;
+  width: 300px;
+  border-bottom: 1px solid var(--primary);
+}
+.search-list:fist-child {
+  border: none;
+  border-bottom: 1px solid var(--primary);
+}
+.search-list:last-child {
+  border: none;
+}
+
+.search-list a {
+  color: blue;
+  margin-left: 10px;
+}

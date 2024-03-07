@@ -8,8 +8,9 @@ import GistInfo from "../components/GistInfo/GistInfo";
 
 function User() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };
+
   const { userLogin } = useParams();
-  const user = gists[0].owner;
+  const user = gists[0]?.owner;
 
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>

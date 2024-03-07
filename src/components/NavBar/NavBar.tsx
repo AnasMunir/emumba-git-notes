@@ -1,9 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "../../App";
 import { getToken, getUser } from "../../api/user";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import "./styles.css";
 import SearchInput from "../SearchInput/SearchInput";
@@ -32,6 +32,9 @@ function NavBar() {
     setDropdownVisible(!isDropdownVisible);
   }
 
+  function clearSearch() {
+    setSearchValue("");
+  }
   useEffect(() => {
     if (accessToken !== undefined) {
       getUser(accessToken).then((user) => setUserInfo?.(user));
@@ -62,17 +65,19 @@ function NavBar() {
               <>
                 <div style={{ position: "relative" }}>
                   <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} />
-                  <SearchList searchTerm={debouncedSearchValue} />
+                  <SearchList searchTerm={debouncedSearchValue} searchItemClicked={clearSearch} />
                   <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
                   {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
                 </div>
               </>
             ) : (
               <>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", alignItems: "baseline" }}>
                   <div style={{ display: "flex", flexDirection: "column", position: "relative" }}>
                     <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} />
-                    <div style={{ position: "absolute" }}>{/* <SearchList searchTerm={debouncedSearchValue} /> */}</div>
+                    <div style={{ position: "absolute", top: "38px" }}>
+                      {<SearchList searchTerm={debouncedSearchValue} searchItemClicked={clearSearch} />}
+                    </div>
                   </div>
                   <button className='btn' onClick={loginToGithub}>
                     Login

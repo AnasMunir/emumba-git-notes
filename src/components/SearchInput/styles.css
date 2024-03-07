@@ -1,0 +1,23 @@
+.search-input {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+
+.search-input:focus {
+  /* border: 1px solid white;
+  color: white; */
+  opacity: 1;
+  outline: none;
+}
+::placeholder {
+  color: white;
+}

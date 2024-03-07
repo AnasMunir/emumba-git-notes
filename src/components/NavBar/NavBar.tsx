@@ -6,15 +6,19 @@ import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Form, Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import "./styles.css";
+import SearchInput from "../SearchInput/SearchInput";
+import SearchList from "../SearchList/SearchList";
+import useDebounce from "../../hooks/useDebounce";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(UserContext);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const query = window.location.search;
   const urlParams = new URLSearchParams(query);
   const code = urlParams.get("code");
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
 
   async function loginToGithub() {
     window.location.assign(
@@ -26,12 +30,6 @@ function NavBar() {
 
   function handleMouseClick() {
     setDropdownVisible(!isDropdownVisible);
-  }
-
-  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
-    if (searchInputRef.current != null) {
-      searchInputRef.current.value = e.currentTarget.value;
-    }
   }
 
   useEffect(() => {
@@ -63,18 +61,24 @@ function NavBar() {
             {id ? (
               <>
                 <div style={{ position: "relative" }}>
-                  <Form method='POST'>
-                    <input type='text' name='searchInput' ref={searchInputRef} onChange={handleSearchInput} />
-                    <button type='submit'>search</button>
-                  </Form>
+                  <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} />
+                  <SearchList searchTerm={debouncedSearchValue} />
                   <Avatar src={avatar_url!} alt={login!} onClick={handleMouseClick} />
                   {isDropdownVisible && <DropdownMenu linkClicked={handleMouseClick} />}
                 </div>
               </>
             ) : (
-              <button className='btn' onClick={loginToGithub}>
-                Login
-              </button>
+              <>
+                <div style={{ display: "flex" }}>
+                  <div style={{ display: "flex", flexDirection: "column", position: "relative" }}>
+                    <SearchInput searchValue={searchValue} setSearchValue={setSearchValue} />
+                    <div style={{ position: "absolute" }}>{/* <SearchList searchTerm={debouncedSearchValue} /> */}</div>
+                  </div>
+                  <button className='btn' onClick={loginToGithub}>
+                    Login
+                  </button>
+                </div>
+              </>
             )}
           </div>
         </div>

@@ -1,40 +1,8 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { createContext, useEffect, useReducer } from "react";
+import { ACTIONS, TFormat, TState } from "./types";
 
-export enum ACTIONS {
-  LOGIN = "LOGIN",
-  SET_USER = "SET_USER",
-  SET_DISPLAY_FORMAT = "SET_DISPLAY_FORMAT",
-  LOGOUT = "LOGOUT",
-}
-
-type TFormat = "cards" | "list";
-export type TState = {
-  login?: string;
-  node_id?: string;
-  avatar_url?: string;
-  url?: string;
-  followers_url?: string;
-  following_url?: string;
-  gists_url?: string;
-  starred_url?: string;
-  email?: string;
-  created_at?: string;
-  updated_at?: string;
-  repos_url?: string;
-  html_url?: string;
-  accessToken?: string | undefined;
-  id?: number | null;
-  public_gists?: number | null;
-  followers?: number | null;
-  following?: number | null;
-  displayFormat?: TFormat;
-  localLogin?: (accessToken: string) => void;
-  setUserInfo?: (payload: TState) => void;
-  logout?: () => void;
-  setDisplayFormat?: (displayFormat: TFormat) => void;
-};
 const initialState: TState = {
   login: "",
   id: null,

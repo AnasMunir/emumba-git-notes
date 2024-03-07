@@ -1,5 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import NavLayout from "./layouts/NavLayout";
+import { navLayoutRoute } from "./layouts/NavLayout";
 import { gistsRoute } from "./pages/Gists";
 import { gistRoute } from "./pages/Gist";
 import { newGistRoute } from "./pages/NewGist";
@@ -9,7 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
-    element: <NavLayout />,
+    ...navLayoutRoute,
     children: [
       {
         errorElement: <ErrorPage />,

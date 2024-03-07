@@ -1,15 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { searchUsers } from "../../api/search";
-import "./styles.css";
 import Loader from "../Loader/Loader";
 import Avatar from "../Avatar";
 import { Link } from "react-router-dom";
+import { useGetSearchContent } from "../../hooks/useGetSearchContent";
+import "./styles.css";
 
 function SearchList({ searchTerm, searchItemClicked }: { searchTerm: string; searchItemClicked: () => void }) {
-  const { isLoading, data } = useQuery({
-    queryKey: ["search", searchTerm],
-    queryFn: () => searchUsers(searchTerm),
-  });
+  const { isLoading, data } = useGetSearchContent(searchTerm);
   return (
     <>
       {searchTerm && (

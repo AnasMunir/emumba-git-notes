@@ -1,5 +1,4 @@
 :root {
-  --blue: #6495ed;
   --background: hsl(200, 20%, 95%);
   --button-background: hsl(24, 53%, 27%);
   --button-background-focus: hsl(25, 36%, 40%);
@@ -28,7 +27,6 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
   margin-bottom: 2rem;
-  /* position: relative; */
 }
 
 .container.loading {
@@ -174,7 +172,6 @@ body {
 
 .btn-outline:hover,
 .btn-outline:focus {
-  /* background: hsl(200, 50%, 90%); */
   background: hsl(25, 45%, 69%);
 }
 

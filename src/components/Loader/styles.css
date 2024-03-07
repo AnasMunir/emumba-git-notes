@@ -1,15 +1,16 @@
 .lds-ellipsis {
-  display: inline;
+  display: inline-block;
   position: relative;
-  /* width: 0px;
-  height: 0px; */
+  margin: 0 auto;
+  width: 10px;
+  height: 10px;
 }
 .lds-ellipsis div {
   position: absolute;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--button-background);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {

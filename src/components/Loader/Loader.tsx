@@ -1,3 +1,5 @@
+import "./styles.css";
+
 function Loader() {
   return (
     <div className='lds-ellipsis'>

@@ -7,7 +7,7 @@ import { useContext } from "react";
 import ListIcon from "../components/icons/ListIcon";
 import GridIcon from "../components/icons/GridIcon";
 import GistTable from "../components/GistTable/GistTable";
-import { UserContext } from "../App";
+import { UserContext } from "../context/user";
 
 function Gists() {
   const { gists, paginationLinks } = useLoaderData() as { gists: TGist[]; paginationLinks: TPaginationLinks };

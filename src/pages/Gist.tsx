@@ -2,11 +2,11 @@ import { ActionFunctionArgs, Form, Link, LoaderFunctionArgs, redirect, useLoader
 import { TGist, deleteGist, getGist } from "../api/gists";
 import Card from "../components/Card/Card";
 import { useContext } from "react";
-import { UserContext } from "../App";
 import GistInfo from "../components/GistInfo/GistInfo";
 import EditIcon from "../components/icons/EditIcon";
 import DeleteIcon from "../components/icons/DeleteIcon";
 import StarIcon from "../components/icons/StarIcon";
+import { UserContext } from "../context/user";
 
 function Gist() {
   const gist = useLoaderData() as TGist;

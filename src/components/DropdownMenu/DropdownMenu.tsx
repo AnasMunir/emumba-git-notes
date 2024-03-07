@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./styles.css";
-import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/user";
 
 function DropdownMenu({ linkClicked }: { linkClicked: () => void }) {
   const { login, html_url, logout } = useContext(UserContext);

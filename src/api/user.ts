@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TState } from "../App";
+import { TState } from "../types";
 
 export function getToken(code: string): Promise<{
   access_token: string;

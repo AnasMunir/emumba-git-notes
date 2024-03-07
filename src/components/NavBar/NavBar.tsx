@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 
-import { UserContext } from "../../App";
 import { getToken, getUser } from "../../api/user";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import "./styles.css";
 import SearchInput from "../SearchInput/SearchInput";
 import SearchList from "../SearchList/SearchList";
 import useDebounce from "../../hooks/useDebounce";
+import { UserContext } from "../../context/user";
 
 function NavBar() {
   const { localLogin, setUserInfo, accessToken, id, login, avatar_url } = useContext(UserContext);

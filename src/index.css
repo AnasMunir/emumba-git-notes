@@ -1,3 +1,11 @@
+:root {
+  --blue: #6495ed;
+  --background: hsl(200, 20%, 95%);
+  --button-background: hsl(24, 53%, 27%);
+  --button-background-focus: hsl(25, 36%, 40%);
+  --primary: hsl(25, 36%, 40%);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -105,7 +113,7 @@ body {
 }
 
 .form-btn-row {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .icon-btn {
@@ -131,9 +139,13 @@ body {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
   text-decoration: none;
   color: hsl(36, 20%, 95%);
-  background: hsl(200, 100%, 25%);
+  background: var(--button-background);
   padding: 0.5rem 2rem;
   border-radius: 0.5rem;
   border: none;
@@ -141,11 +153,12 @@ body {
   font-family: inherit;
   cursor: pointer;
   font-size: 15px;
+  border: 2px solid var(--button-background);
 }
 
 .btn:hover,
 .btn:focus {
-  background: hsl(200, 100%, 15%);
+  background: var(--button-background-focus);
 }
 .btn:disabled {
   background: hsl(200, 10%, 50%);
@@ -155,13 +168,14 @@ body {
 
 .btn-outline {
   background: none;
-  color: hsl(200, 100%, 25%);
-  border: 2px solid hsl(200, 100%, 25%);
+  color: var(--button-background);
+  border: 2px solid var(--button-background);
 }
 
 .btn-outline:hover,
 .btn-outline:focus {
-  background: hsl(200, 50%, 90%);
+  /* background: hsl(200, 50%, 90%); */
+  background: hsl(25, 45%, 69%);
 }
 
 .btn-outline:disabled {
